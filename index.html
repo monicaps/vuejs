@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hola Mundo con VueJS</title>
+</head>
+<body>
+	<div id="app">
+		<!--<h1 v-if="message.length>2">Hola <span v-text="message"></span></h1>
+		<h1 v-else>Escribe tu nombre</h1>
+		<input type="text" v-model="message">-->
+		<h1>Tareas</h1>
+		<ul>
+			<li v-for="tarea in tareas" v-text="tarea"></li>
+		</ul>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:'#app',
+			data:{
+				message:"Aprendible",
+				tareas:[
+					"Tarea 1",
+					"Tarea 2",
+					"Tarea 3"
+				]
+			}
+		});
+	</script>
+</body>
+</html>
