@@ -10,7 +10,11 @@
 		<input type="text" v-model="message">-->
 		<h1>Tareas</h1>
 		<ul>
-			<li v-for="tarea in tareas" v-text="tarea"></li>
+			<li v-for="tarea in tareas">
+				<span v-text="tarea.title"></span><br>
+				<span v-if="tarea.completed">Completa</span>
+				<span v-else>Incompleta</span>
+			</li>
 		</ul>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -18,11 +22,11 @@
 		var app=new Vue({
 			el:'#app',
 			data:{
-				message:"Aprendible",
+				message:"Aprendiendo VueJS",
 				tareas:[
-					"Tarea 1",
-					"Tarea 2",
-					"Tarea 3"
+					{title:"Tarea 1",completed:true},
+					{title:"Tarea 2",completed:false},
+					{title:"Tarea 3",completed:true}
 				]
 			}
 		});
