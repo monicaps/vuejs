@@ -5,9 +5,10 @@
 </head>
 <body>
 	<div id="app">
-		<!--<h1 v-if="message.length>2">Hola <span v-text="message"></span></h1>
+		<h2 v-if="message.length>2">Hola <span v-text="message"></span></h1>
 		<h1 v-else>Escribe tu nombre</h1>
-		<input type="text" v-model="message">-->
+		<input type="text" v-model="message">
+		<button v-on:click="message=message.split('').reverse().join('')">Invertir</button>
 		<h1>Tareas</h1>
 		<ul>
 			<li v-for="tarea in tareas">
@@ -22,7 +23,7 @@
 		var app=new Vue({
 			el:'#app',
 			data:{
-				message:"Aprendiendo VueJS",
+				message:"",
 				tareas:[
 					{title:"Tarea 1",completed:true},
 					{title:"Tarea 2",completed:false},
