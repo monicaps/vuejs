@@ -2,21 +2,30 @@
 <html>
 <head>
 	<title>Hola Mundo con VueJS</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+		.glyphicon-check,.glyphicon-unchecked{
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
-	<div id="app">
-		<h2 v-if="message.length>2">Hola <span v-text="message"></span></h1>
-		<h1 v-else>Escribe tu nombre</h1>
-		<input type="text" v-model="message">
-		<button @click="reverse">Invertir</button>
-		<h1>Tareas</h1>
-		<ul>
-			<li v-for="tarea in tareas">
-				<span v-text="tarea.title"></span><br>
-				<span v-if="tarea.completed">Completa</span>
-				<span v-else>Incompleta</span>
-			</li>
-		</ul>
+	<div class="container">
+		<div id="app">
+			<h1>Tareas</h1>
+			<ul>
+				<li v-for="task in tasks">
+					<span v-text="task.title"></span>
+					<span v-if="task.completed" @click="task.completed=false" class="glyphicon glyphicon-check"></span>
+					<span v-else @click="task.completed=true" class="glyphicon glyphicon-unchecked"></span>
+				</li>
+				<li class="form-inline">
+					<input v-on:keyup.enter="addTask" v-model="newTask" type="text" class="form-control">
+					<!--<button v-on:click="addTask" class="btn btn-primary">+</button>-->
+				</li>
+			</ul>
+		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script type="text/javascript">
@@ -24,8 +33,8 @@
 			el:'#app',
 			data:{
 				//aqui se encuentran los datos que se estan manejando con VueJS
-				message:"",
-				tareas:[
+				newTask:"",
+				tasks:[
 					{title:"Tarea 1",completed:true},
 					{title:"Tarea 2",completed:false},
 					{title:"Tarea 3",completed:true}
@@ -33,8 +42,18 @@
 			},
 			methods:{
 				//se definen todos los metodos a usar
-				reverse:function () {
+				/*reverse:function () {
 					this.message=this.message.split('').reverse().join('');
+				}*/
+				addTask:function (){
+					if(this.newTask.length<=1){
+						return alert('Ingrese un nombre en su tarea');
+					}
+					this.tasks.push({
+						title:this.newTask,
+						completed:false
+					});
+					this.newTask="";
 				}
 			}
 		});
