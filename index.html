@@ -19,8 +19,7 @@
 			<ul>
 				<li v-for="task in tasks">
 					<span v-text="task.title"></span>
-					<span v-if="task.completed" @click="task.completed=false" class="glyphicon glyphicon-check"></span>
-					<span v-else @click="task.completed=true" class="glyphicon glyphicon-unchecked"></span>
+					<span @click="completeTask(task)" :class="taskClasses(task)"></span>
 				</li>
 				<li class="form-inline">
 					<input v-on:keyup.enter="addTask" v-model="newTask" type="text" class="form-control">
@@ -56,6 +55,12 @@
 						completed:false
 					});
 					this.newTask="";
+				},
+				completeTask:function(task){
+					return task.completed=!task.completed;
+				},
+				taskClasses: function (task){
+					return ['glyphicon',task.completed?'glyphicon-check': 'glyphicon-unchecked'];
 				}
 			},
 			computed:{
