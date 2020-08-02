@@ -1,15 +1,18 @@
 Vue.component('tasks',{
-	template:`<div>
-		<h1>Tareas</h1>
-		<p>Tareas Completas: {{completed}}</p>
-		<p>Tareas Incompletas: {{incompleted}}</p>
-		<ul>
-			<li is="task" v-for="task in tasks" :task="task"></li>
-			<li class="form-inline">
-				<input v-on:keyup.enter="add" v-model="newTask" type="text" class="form-control">
-			</li>
-		</ul>
-	</div>`,
+	template:`<section class="todoapp">
+		<header class="header">
+			<h1>Tareas</h1>
+			<input v-on:keyup.enter="add" v-model="newTask" type="text" class="new-todo">
+		</header>
+		<section>
+			<ul class="todo-list">
+				<li class="todo" is="task" v-for="task in tasks" :task="task"></li>
+			</ul>
+		</section>
+		<footer class="footer">
+			<span class="todo-count">Completas: {{completed}} | Incompletas: {{incompleted}}</span>
+		</footer>
+	</section>`,
 	data:function(){
 		//aqui se encuentran los datos que se estan manejando con VueJS
 		return{
@@ -56,18 +59,15 @@ Vue.component('tasks',{
 
 Vue.component('task',{
 	props:['task'],
-	template:`<li>
-		<span v-text="task.title"></span>
-		<span @click="completeTask()" :class="classes"></span>
+	template:`<li :class="classes">
+		<div class="view">
+			<input type="checkbox" class="toggle" v-model="task.completed"/>
+			<label v-text="task.title"></label>
+		</div>
 	</li>`,
-	methods:{
-		complete:function(){
-			return this.task.completed=!this.task.completed;
-		}
-	},
 	computed:{
 		classes: function (){
-			return ['glyphicon',this.task.completed?'glyphicon-check': 'glyphicon-unchecked'];
+			return {completed:this.task.completed};
 		}
 	}
 });
