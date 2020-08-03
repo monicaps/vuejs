@@ -41,6 +41,13 @@ body {
 	display: none;
 }
 
+.header{
+	font: 14px Helvetica, Arial, sans-serif;
+	text-shadow: transparent;
+	margin: 0 auto;
+	line-height: 1.4em;
+}
+
 .todoapp {
 	background: #fff;
 	margin: 130px 0 40px 0;
